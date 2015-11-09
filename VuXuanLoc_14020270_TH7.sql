@@ -3,7 +3,7 @@
 
 use classicmodels
 
-SELECT e.employeeNumber, e.firstName, e.lastName, of.city 
+SELECT e.employeeNumber, CONCAT(e.firstName," ", e.lastName) as fullName, of.officeCode
 FROM employees e JOIN offices of ON e.officeCode = of.officeCode;
 
 SELECT C.customerName, P.productName FROM customers C 
