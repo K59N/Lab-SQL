@@ -1,5 +1,5 @@
 -- Creat by Loc VU
--- Date 4/11/2015
+-- Date 16/11/2015
 
 use classicmodels
 
@@ -21,13 +21,8 @@ WHERE EXTRACT(YEAR FROM orderDate) = 2005 and EXTRACT(MONTH FROM orderDate) = 3;
 SELECT * FROM orders WHERE EXTRACT(YEAR FROM orderDate) = EXTRACT(YEAR FROM (SELECT MAX(orderDate) FROM orders)) and
 EXTRACT(MONTH FROM orderDate) = EXTRACT(MONTH FROM (SELECT MAX(orderDate) FROM orders))
 
-SELECT orderNumber, orderDate, requiredDate, status, total
-FROM orders , (SELECT orderNumber, sum(orderdetails.priceEach*orderdetails.quantityOrdered) as total FROM orderdetails GROUP BY orderNumber) AS TT 
-WHERE orders.orderNumber = TT.orderNumber;
-
 SELECT orderNumber, orderDate, (SELECT SUM(quantityOrdered*priceEach) FROM orderdetails WHERE orderNumber = O.orderNumber) AS TotalCost
 FROM orders O;
-
 
 
 SELECT C.customerNumber, C.customerName, totalOrder, totalPayment
